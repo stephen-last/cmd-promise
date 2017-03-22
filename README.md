@@ -7,6 +7,8 @@ Node command line interface with a simple Promise based API.
 [![Version](https://img.shields.io/npm/v/cmd-promise.svg)](https://www.npmjs.com/package/cmd-promise)
 [![Downloads](https://img.shields.io/npm/dt/cmd-promise.svg)](https://www.npmjs.com/package/cmd-promise)
 
+Inspired by [node-cmd](https://github.com/RIAEvangelist/node-cmd).
+
 ## Requirments
 
 - Uses native node promises (including `Promise.all` with generic iterables) so requires at least node version 4.0.0. See [http://node.green/](http://node.green/#ES2015-built-ins-Promise).
