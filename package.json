@@ -1,0 +1,14 @@
+{
+  "name": "cmd-promise",
+  "version": "1.0.0",
+  "description": "Node command line interface with a simple Promise based API.",
+  "main": "cmd-promise.js",
+  "scripts": {
+    "test": ""
+  },
+  "author": "Stephen Last",
+  "license": "MIT",
+  "devDependencies": {
+    "semver": "^5.3.0"
+  }
+}
