@@ -2,6 +2,8 @@
 const semver = require('semver')
 const cmd = require('../cmd-promise')
 
+console.log('cmd-promise: More involved example.')
+
 const commands = `
   npm view npm version
   npm -v

@@ -1,13 +1,17 @@
 
 const cmd = require('../cmd-promise')
 
-const commands = `
+console.log('cmd-promise: One or multiple commands.')
+
+// const single = `node -v`
+
+const multiple = `
   node -v
   npm -v
 `
 
-cmd(commands).then(out => {
-  console.log('out ===', out)
+cmd(multiple).then(out => {
+  console.log('out =', out)
 }).catch(err => {
-  console.log('err ===', err)
+  console.log('err =', err)
 })

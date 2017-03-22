@@ -20,7 +20,7 @@ Inspired by [node-cmd](https://github.com/RIAEvangelist/node-cmd).
 
 ## Examples
 
-Run a single command:
+### Single command
 
 ```js
 const cmd = require('cmd-promise')
@@ -34,7 +34,7 @@ cmd(`node -v`).then(out => {
 // out = { stdout: 'v4.2.2\r\n', stderr: '' }
 ```
 
-Run multiple commands
+### Multiple commands
 
 ```js
 const cmd = require('cmd-promise')
@@ -54,7 +54,7 @@ cmd(commands).then(out => {
 // out[0].stdout = v4.2.2
 ```
 
-Check if your npm version is out of date:
+### Check your npm version
 
 ```js
 const semver = require('semver') // https://github.com/npm/node-semver
@@ -81,16 +81,38 @@ cmd(commands).then(out => {
 })
 ```
 
+### Return the child process instead
+
+```js
+const cmd = require('../cmd-promise')
+
+const options = { returnProcess: true }
+
+cmd(`node -v`, options).then(childProcess => {
+  console.log('pid =', childProcess.pid)
+  childProcess.stdout.on('data', stdout => {
+    console.log('stdout =', stdout)
+  })
+  childProcess.stderr.on('data', stderr => {
+    console.log('stderr =', stderr)
+  })
+}).catch(err => {
+  console.log('err =', err)
+})
+```
+
 ## API
 
-`cmd(commands [,options]) -> Promise`
+`cmd(commands [,options] [,execOptions]) -> Promise`
 
 - **commands** (string) Single or multiple line string of commands to execute.
-- **options** (object) Options as passed to [`exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) method of the [child_process](https://nodejs.org/api/child_process.html) node module.
+- **options** (object)
+  - `returnProcess` (boolean) Return the child process instead of waiting on and returning the outcome. Default is `false`.
+- **execOptions** (object) Options as passed to the  [`exec()`](https://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback) method of the [child_process](https://nodejs.org/api/child_process.html) node module.
 
 Returns a Promise.
 
-For single commands the promises return value is an `object` containing `stdout` and `stderr` properties.
+For single commands the promises return value is an `object` containing `stdout` and `stderr` properties. If `options.returnProcess` is set to `true` the return value is the [child process](https://nodejs.org/api/child_process.html#child_process_class_childprocess) instead.
 
 ```js
 const cmd = require('cmd-promise')
@@ -101,7 +123,7 @@ cmd(`node -v`).then(out => {
 })
 ```
 
-For multiple line command calls the promises return value is an array of `object`'s containing `stdout` and `stderr` properties.
+For multiple line command calls the promises return value is an array of `object`'s containing `stdout` and `stderr` properties. If `options.returnProcess` is set to `true` the return value is an array of [child processes](https://nodejs.org/api/child_process.html#child_process_class_childprocess) instead.
 
 ```js
 const cmd = require('cmd-promise')
