@@ -88,3 +88,29 @@ cmd(commands).then(out => {
 
 Returns a Promise.
 
+For single commands the promises return value is an `object` containing `stdout` and `stderr` properties.
+
+```js
+const cmd = require('cmd-promise')
+
+cmd(`node -v`).then(out => {
+  console.log('out.stdout =', out.stdout) // v4.2.2
+  console.log('out.stderr =', out.stderr)
+})
+```
+
+For multiple line command calls the promises return value is an array of `object`'s containing `stdout` and `stderr` properties.
+
+```js
+const cmd = require('cmd-promise')
+
+const commands = `
+  node -v
+  npm -v
+`
+
+cmd(commands).then(out => {
+  console.log('out[0] =', out[0]) // result from 'node -v'
+  console.log('out[1] =', out[1]) // result from 'npm -v'
+})
+```
