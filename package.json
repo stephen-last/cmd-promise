@@ -1,6 +1,6 @@
 {
   "name": "cmd-promise",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Node command line interface with a simple Promise based API.",
   "main": "cmd-promise.js",
   "scripts": {
